@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>jQuery Responsive LazyLoad</title>
+        <meta name="viewport" content="width=device-width">
+
+        <style type="text/css">
+			img {
+				width: 100%;
+				height: auto;
+			}
+
+			.lazy-tablet, .lazy-mobile {
+				display: none;
+				visibility: hidden;
+			}
+
+			.lt-ie9 .lazy-desktop, .lt-ie9 .lazy-tablet {
+				display: none;
+			}
+
+			@media (max-width: 960px) {
+				.lazy-desktop {
+					visibility: hidden;
+					position: absolute;
+					left: -999%;
+				}
+
+				.lazy-tablet {
+					display: block;
+					visibility: visible;
+				}
+			}
+
+			@media (max-width: 600px) {
+				.lazy-desktop, .lazy-tablet {
+					visibility: hidden;
+					position: absolute;
+					left: -999%;
+				}
+
+				.lazy-mobile {
+					display: block;
+					visibility: visible;
+				}
+			}
+		</style>
+    </head>
+    <body>
+
+    	<h1>jQuery Responsive LazyLoad</h1>
+    	<p>This is a basic proof of concept using media queries and the jQuery lazy load plugin to load the appropriate image for the screen available screen size.</p>
+    	<p>It's an IE9 up approach. In IE8 and it's current state, only the Desktop version is lazy loaded.</p>
+    	<p>Without JavaScript the desktop version is also loaded.</p>
+    	<p>To combat funky asset loading and duplicate http calls to the HTML file I'm loading an empty 1x1 pixel gif initially.</p>
+
+		<img class="lazy-desktop" data-original="http://dummyimage.com/1920x980&text=desktop" src="lazy.gif" alt="" />
+		<img class="lazy-tablet" data-original="http://dummyimage.com/960x490&text=tablet" src="lazy.gif" alt="" />
+		<img class="lazy-mobile" data-original="http://dummyimage.com/480x245&text=mobile" src="lazy.gif" alt="" />
+		<noscript>
+			<img src="http://dummyimage.com/1920x980&text=desktop" alt="" />
+		</noscript>
+
+
+		<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.8.4/jquery.lazyload.min.js"></script>
+		<script type="text/javascript">
+			$("html:not(.lt-ie9) img, .lt-ie9 img.lazy-desktop").lazyload();
+		</script>
+	</body>
+</html>
