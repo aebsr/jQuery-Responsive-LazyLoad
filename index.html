@@ -30,6 +30,8 @@
 			.lazy-tablet, .lazy-mobile {
 				display: none;
 				visibility: hidden;
+				position: absolute;
+				left: -999%;
 			}
 
 			.lt-ie9 .lazy-desktop, .lt-ie9 .lazy-tablet {
@@ -46,6 +48,7 @@
 				.lazy-tablet {
 					display: block;
 					visibility: visible;
+					position: static;
 				}
 			}
 
@@ -59,6 +62,7 @@
 				.lazy-mobile {
 					display: block;
 					visibility: visible;
+					position: static;
 				}
 			}
 		</style>
