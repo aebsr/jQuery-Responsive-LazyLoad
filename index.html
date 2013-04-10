@@ -7,9 +7,24 @@
         <meta name="viewport" content="width=device-width">
 
         <style type="text/css">
+        	body {
+        		font-family: Helvetica, Arial, sans-serif
+        	}
+
+        	section {
+        		padding-left: 150px;
+        	}
+
 			img {
-				width: 100%;
+				max-width: 100%;
 				height: auto;
+				display: block;
+				margin: 0 auto;
+			}
+
+			pre {
+				border-top: 2px solid black;
+				padding-top: 1em;
 			}
 
 			.lazy-tablet, .lazy-mobile {
@@ -50,11 +65,15 @@
     </head>
     <body>
 
-    	<h1>jQuery Responsive LazyLoad</h1>
-    	<p>This is a basic proof of concept using media queries and the jQuery lazy load plugin to load the appropriate image for the screen available screen size.</p>
-    	<p>It's an IE9 up approach. In IE8 and it's current state, only the Desktop version is lazy loaded.</p>
-    	<p>Without JavaScript the desktop version is also loaded.</p>
-    	<p>To combat funky asset loading and duplicate http calls to the HTML file I'm loading an empty 1x1 pixel gif initially.</p>
+    	<section>
+    		<h1>jQuery Responsive LazyLoad</h1>
+			<p>This is a basic proof of concept using media queries and the <a href="https://github.com/tuupola/jquery_lazyload">jQuery lazy load</a> plugin to load the appropriate image for the screen available screen size.</p>
+			<p>It's an IE9 up approach. In IE8 and it's current state, only the Desktop version is lazy loaded.</p>
+			<p>Without JavaScript the desktop version is also loaded.</p>
+			<p>To combat funky asset loading and duplicate http calls to the HTML file I'm loading an empty 1x1 pixel gif initially.</p>
+
+			<a href="https://github.com/aebsr/jQuery-Responsive-LazyLoad/tree/gh-pages"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
+    	</section>
 
 		<img class="lazy-desktop" data-original="http://dummyimage.com/1920x980&text=desktop" src="lazy.gif" alt="" />
 		<img class="lazy-tablet" data-original="http://dummyimage.com/960x490&text=tablet" src="lazy.gif" alt="" />
@@ -62,6 +81,43 @@
 		<noscript>
 			<img src="http://dummyimage.com/1920x980&text=desktop" alt="" />
 		</noscript>
+
+		<code><pre>
+			.lazy-tablet, .lazy-mobile {
+				display: none;
+				visibility: hidden;
+			}
+
+			.lt-ie9 .lazy-desktop, .lt-ie9 .lazy-tablet {
+				display: none;
+			}
+
+			@media (max-width: 960px) {
+				.lazy-desktop {
+					visibility: hidden;
+					position: absolute;
+					left: -999%;
+				}
+
+				.lazy-tablet {
+					display: block;
+					visibility: visible;
+				}
+			}
+
+			@media (max-width: 600px) {
+				.lazy-desktop, .lazy-tablet {
+					visibility: hidden;
+					position: absolute;
+					left: -999%;
+				}
+
+				.lazy-mobile {
+					display: block;
+					visibility: visible;
+				}
+			}
+		</pre></code>
 
 
 		<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1.9.1/jquery-1.9.1.min.js"></script>
